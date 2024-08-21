@@ -1,4 +1,4 @@
-/* Base CSS - for screens 1440px and above */
+
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
@@ -14,7 +14,8 @@ body {
 
 }
 
-.container {
+.container-two {
+
     /* padding: 20px; */
     /* width: 915px; */
     height: 100vh;
@@ -29,6 +30,7 @@ body {
 
 .bg-card {
     /* padding: 20px; */
+
     width: 46%;
     height: 100vh;
     background-color: #FFFFFFD4;
@@ -76,7 +78,8 @@ body {
 @media screen and (max-width : 1024px) {
     .content{
         h2{
-            font-size: xxx-large;
+            font-size: 33px;
+            line-height: 47px;
         }
     .info{
         font-size: 14px;
@@ -92,7 +95,8 @@ body {
     font-style: italic;
 }
 .newsletter button {
-    width: 50%;
+    width: 42%;
+    font-size: 16px;
 }
 
     }
