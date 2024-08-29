@@ -4,30 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAGSA Welcome Page</title>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style2.css">
+    <style>
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 496px; 
+            height: 258px;
+            
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-message {
+            text-align: center;
+        }
+
+        .modal-message h2 {
+            margin-bottom: 10px;
+        }
+
+        .modal-message p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    
     <div class="bg-card">
-    <div class="container-two">
-        <div class="content">
-            <div class="logo">
-                <img src="./image/logo2.png" alt="MAGSA Logo">
-               
-            </div>
-            <h2>Bienvenidos a MAGSA</h2>
-            
-            <div class="text-class">
-            <p class="info">Para más información, ponte en contacto con nosotros y recibe</p>
-            <p class="info">notificaciones sobre nuestros servicios y proyectos</p>
-        </div>
-            <div class="newsletter">
-                <input type="email" placeholder="Enter email Id Registrate">
-                <button>Registrate</button>
+        <div class="container-two">
+            <div class="content">
+                <div class="logo">
+                    <img src="./image/logo2.png" alt="MAGSA Logo">
+                </div>
+                <h2>Bienvenidos a MAGSA</h2>
+                
+                <div class="text-class">
+                    <p class="info">Para más información, ponte en contacto con nosotros y recibe</p>
+                    <p class="info">notificaciones sobre nuestros servicios y proyectos</p>
+                </div>
+                <div class="newsletter">
+                    <input type="email" id="email" placeholder="Enter email Id Registrate" required>
+                    <button onclick="sendEmail()">Registrate</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div id="alertModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalMessage" class="modal-message"></div>
+        </div>
+    </div>
+
+    <script>
+        function sendEmail() {
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailPattern.test(email)) {
+                const emailBody = `Email: ${email}`;
+                const mailtoLink = `mailto:tripty.dhanuk@delostylestudio.com?subject=Newsletter Subscription&body=${encodeURIComponent(emailBody)}`;
+                // window.open(mailtoLink, '_blank');
+
+                showModal(
+        `<img src="./image/alert2.png" alt="alert2" class="alert2"/>`+
+        `<h2 class="alert-head2">Thank you for registering</h2>` +
+        `<p class="alert-para2">We have received your request and we will contact you soon</p>`
+    );
+             } else {
+    showModal(
+        `<img src="./image/alert1.png" alt="alert1" class="alert1"/>`+
+        `<h2 class="alert-head">Please enter a valid email address</h2>` +
+        `<p class="alert-para">You have not entered a valid email address. Please provide a valid email id and we will contact you soon.</p>`
+    );
+}
+
+        }
+
+        function showModal(message) {
+            const modal = document.getElementById('alertModal');
+            const modalMessage = document.getElementById('modalMessage');
+            modalMessage.innerHTML = message;
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('alertModal');
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('alertModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
